@@ -4,7 +4,7 @@ const fs = require('fs');
 const axios = require('axios');
 
 /*functions*/
-const pullCalender = async (url) => {
+const pullICalCalender = async (url) => {
     // Check if the URL provided is an iCal URL
     if (!url.endsWith('.ics')) {
         console.error('The URL provided is not an iCal URL.');
@@ -37,7 +37,7 @@ const pullCalender = async (url) => {
     return null;
 }
 
-const parseCalender = (data) => {
+const parseICalCalender = (data) => {
     // Check if there is any data to parse
     if (data === null) {
         console.error('No data to parse.');
@@ -57,6 +57,7 @@ const parseCalender = (data) => {
         if (events.hasOwnProperty(key)) {
             const event = events[key];
 
+            // To be updated in case of schema changes
             response[event.uid] = {};
             response[event.uid]['summary'] = event.summary;
             response[event.uid]['description'] = event.description;
@@ -69,9 +70,21 @@ const parseCalender = (data) => {
     return response;
 }
 
-const uploadCalendar = (url, clubName) => {
+const uploadICalCalendar = (url, clubName) => {
     // TODO: upload using prisma to database
 }
+
+pullGoogleCalender = async (url) => {}
+
+parseGoogleCalender = (data) => {}
+
+uploadGoogleCalendar = (url, clubName) => {}
+
+pullWCMSCalendar = async (url) => {}
+
+parseWCMSCalendar = (data) => {}
+
+uploadWCMSCalendar = (url, clubName) => {}
 
 /*exports*/
 module.exports = {
